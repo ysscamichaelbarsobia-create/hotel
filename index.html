@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Booking System - Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            font-family: 'Inter', sans-serif; 
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+        .welcome-screen { transition: all 0.5s ease-in-out; }
+        .auth-container {
+            transition: all 0.5s ease-in-out;
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            max-height: 90vh;
+        }
+        .auth-container.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card-auth { 
+            border-radius: 20px; 
+            border: none; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
+            background: #ffffff;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .btn-custom { 
+            background-color: #0f172a; 
+            color: #ffffff; 
+            border-radius: 10px; 
+            border: none; 
+            padding: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-custom:hover { 
+            background-color: #334155; 
+            color: #ffffff; 
+            transform: translateY(-1px);
+        }
+        .btn-get-started {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: #ffffff;
+            border-radius: 12px;
+            border: none;
+            padding: 14px 35px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.5);
+            transition: all 0.3s;
+        }
+        .btn-get-started:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(59, 130, 246, 0.6);
+            color: #ffffff;
+        }
+        .nav-pills .nav-link {
+            border-radius: 10px;
+            font-weight: 600;
+            color: #64748b;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #0f172a !important;
+            color: #ffffff !important;
+        }
+        .form-control { border-radius: 10px; padding: 10px 14px; }
+    </style>
+</head>
+<body class="d-flex justify-content-center align-items-center py-5">
+
+    <div id="welcomeScreen" class="welcome-screen text-center text-white px-3 my-auto" style="max-width: 600px;">
+        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow-lg" style="width: 90px; height: 90px;">
+            <i class="fa-solid fa-hotel fa-2x"></i>
+        </div>
+        <h1 class="fw-bold display-5 mb-5">Hello, Welcome to <br><span class="text-info">Hotel Booking System</span></h1>
+        <button onclick="showAuthCard()" class="btn btn-get-started">
+            Get Started <i class="fa-solid fa-arrow-right ms-2"></i>
+        </button>
+    </div>
+
+    <div id="authContainer" class="auth-container my-auto" style="width: 460px;">
+        <div class="card card-auth p-4 p-md-5 position-relative">
+            <button onclick="hideAuthCard()" class="btn btn-sm btn-light position-absolute top-0 end-0 m-3 rounded-circle shadow-sm" style="width: 32px; height: 32px; z-index: 10;">
+                <i class="fa-solid fa-xmark text-dark"></i>
+            </button>
+
+            <div class="text-center mb-4 mt-2">
+                <div class="bg-dark text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-2 shadow" style="width: 55px; height: 55px;">
+                    <i class="fa-solid fa-hotel fa-lg"></i>
+                </div>
+                <h4 class="fw-bold mb-1">Hotel Booking Portal</h4>
+                <p class="text-muted small">Please sign in or register to continue</p>
+            </div>
+
+            <div id="alertBox"></div>
+
+            <ul class="nav nav-pills nav-fill mb-4 bg-light p-1 rounded-3">
+                <li class="nav-item">
+                    <button class="nav-link active py-2" data-bs-toggle="pill" data-bs-target="#login-pane">
+                        <i class="fa-solid fa-lock me-1"></i> Login
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link py-2" data-bs-toggle="pill" data-bs-target="#signup-pane">
+                        <i class="fa-solid fa-user-plus me-1"></i> Sign Up
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="login-pane">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-user text-muted"></i></span>
+                                <input type="text" class="form-control border-start-0 ps-0" id="loginUsername" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold small">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-key text-muted"></i></span>
+                                <input type="password" class="form-control border-start-0 ps-0" id="loginPassword" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-custom w-100">
+                            <i class="fa-solid fa-right-to-bracket me-1"></i> Sign In
+                        </button>
+                    </form>
+                </div>
+
+                <div class="tab-pane fade" id="signup-pane">
+                    <form id="signupForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Create Username</label>
+                            <input type="text" class="form-control" id="newUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Email Address</label>
+                            <input type="email" class="form-control" id="newEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Phone Number (11 Digits)</label>
+                            <input type="text" class="form-control" id="newPhone" maxlength="11" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Create Password</label>
+                            <input type="password" class="form-control" id="newPassword" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold small">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-custom w-100">
+                            <i class="fa-solid fa-user-check me-1"></i> Register Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
